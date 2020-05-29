@@ -1,15 +1,12 @@
-const express = require('express');
-const bodyParser = require('body-parser');
+const express = require("express");
+const bodyParser = require("body-parser");
 
 const dishRouter = express.Router();
 
 dishRouter.use(bodyParser.json());
 
-dishRouter.route('/dishes').all((req, res, next) => {
-    res.statusCode = 200;
-    res.setHeader("Content-Type", "text/plain");
-    next();
-  })
+dishRouter
+  .route("/")
   .get((req, res, next) => {
     res.end("will send all the dishes to you!");
   })
@@ -29,25 +26,28 @@ dishRouter.route('/dishes').all((req, res, next) => {
     res.end("Deleting all the dishes");
   });
 
-  dishRouter.route('/dishes/:dishId').all((req, res, next)=>{
-      res.statusCode = 200;
-      res.setHeader("Content-Type", "text/plain");
-      next();
-  }).get((req, res, next) => {
+dishRouter
+  .route("/:dishId")
+  .get((req, res, next) => {
     res.end(
-      "will send the details of the dish: " + req.params.dishId + " to you!"
+      "Will send the details of the dishId: " + req.params.dishId + " to you!"
     );
   })
   .post((req, res, next) => {
-    res.end("Post operation not supported on /dishes/" + req.params.dishId);
+    res.statusCode = 403;
+    res.end("Post operation not supported on dishId: " + req.params.dishId);
   })
   .put((req, res, next) => {
-    res.statusCode = 403;
-    res.write("Updating the dish : " + req.params.dishId);
-    res.end("Will update the dish: "+ req.params.body.name + " with the details: " + req.body.description);
+    res.write("Updating the dish : " + req.params.dishId+"\n");
+    res.end(
+      "Will update the dish: " +
+        req.params.body.name +
+        " with the details: " +
+        req.body.description
+    );
   })
   .delete((req, res, next) => {
     res.end("Deleting the dish" + req.params.dishId);
   });
-  
-  module.exports = dishRouter;
+
+module.exports = dishRouter;
