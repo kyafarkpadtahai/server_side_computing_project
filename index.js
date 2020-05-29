@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 
 const dishRouter = require('./route/dishRouter');
 const promoRouter = require('./route/promoRouter');
+const leaderRouter = require('./route/leaderRouter');
 const hostname = "localhost";
 const port = 3000;
 
@@ -15,6 +16,8 @@ app.use('/dishes', dishRouter);
 app.use('/dishes/:dishId', dishRouter);
 app.use('/promotions', promoRouter);
 app.use('/promotions/:promotionId', promoRouter);
+app.use('/leaders', promoRouter);
+app.use('/leaders/:leaderId', promoRouter);
 
 app.use(express.static(__dirname + "/public"));
 

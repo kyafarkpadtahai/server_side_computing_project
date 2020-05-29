@@ -8,7 +8,7 @@ dishRouter.use(bodyParser.json());
 dishRouter
   .route("/")
   .get((req, res, next) => {
-    res.end("will send all the dishes to you!");
+    res.end("Will send all the dishes to you!");
   })
   .post((req, res, next) => {
     res.end(
